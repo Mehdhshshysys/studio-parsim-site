@@ -20,3 +20,7 @@
 
 ## یادداشت
 فونت Vazirmatn از Google Fonts بارگذاری می‌شود؛ در صورت نبود دسترسی شبکه، فونت جایگزین سیستم استفاده خواهد شد.
+
+
+## Interactive 3D hero
+The homepage hero includes a procedural Three.js sports-car scene with metallic materials, lighting, orbit rings and particles. Inspired by techniques seen in [Formwork Heliodon](https://github.com/shellcat-com/formwork-heliodon) and [Three.js examples](https://threejs.org/examples/). The existing page illustration remains as a fallback if WebGL or the CDN is unavailable.
