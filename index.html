@@ -345,9 +345,19 @@ const modelGroup=new T.Group();modelGroup.visible=true;s.add(modelGroup);const c
 };
 const canvas3D=document.getElementById('parsim-3d');
 const hero3D=canvas3D?.parentElement;
-if(hero3D&&'IntersectionObserver'in window){
- const observer3D=new IntersectionObserver((entries)=>{if(entries.some(entry=>entry.isIntersecting)){observer3D.disconnect();const start3D=()=>boot3D();if('requestIdleCallback'in window)requestIdleCallback(start3D,{timeout:5000});else setTimeout(start3D,1800)}},{rootMargin:'80px 0px'});
- observer3D.observe(hero3D);
-}else if('requestIdleCallback'in window){requestIdleCallback(()=>boot3D(),{timeout:5000})}else{setTimeout(()=>boot3D(),1800)}
+if(hero3D){
+ let started3D=false;
+ const start3D=()=>{
+  if(started3D)return;
+  started3D=true;
+  hero3D.removeEventListener('pointerdown',start3D);
+  hero3D.removeEventListener('click',start3D);
+  if('requestIdleCallback'in window)requestIdleCallback(()=>boot3D(),{timeout:2500});
+  else setTimeout(()=>boot3D(),250);
+ };
+ // Keep the lightweight animated SVG visible immediately; load WebGL only when the visitor interacts with the 3D hero.
+ hero3D.addEventListener('pointerdown',start3D,{once:true,passive:true});
+ hero3D.addEventListener('click',start3D,{once:true});
+}
 </script>
 </body></html>
