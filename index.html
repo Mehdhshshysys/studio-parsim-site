@@ -263,15 +263,15 @@ html{scroll-behavior:smooth;scroll-padding-top:90px;background:var(--bg)}body{ba
 @keyframes stampFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-6px) rotate(2deg)}}
 .topline{position:fixed;top:0;left:0;right:0;z-index:60;transform-origin:100% 50%;transform:scaleX(calc(.04 + var(--p,0)*.96));will-change:transform}
 .status-live:before{content:"";width:7px;height:7px;border-radius:50%;background:#5be3a1;box-shadow:0 0 10px #5be3a1;flex:0 0 7px}
-#splash{position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:radial-gradient(circle at 50% 42%,#14363d 0,#0a1220 64%);animation:splashOut .5s ease 1.5s forwards}
+#splash{position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:radial-gradient(circle at 50% 42%,#14363d 0,#0a1220 64%);animation:splashOut .35s ease .65s forwards}
 .no-splash #splash{display:none}
 #splash .sp-logo{width:min(44vw,168px);height:auto;aspect-ratio:1;filter:drop-shadow(0 0 30px #67d7c555)}
-#splash .sp-star{stroke-dasharray:100;stroke-dashoffset:100;fill-opacity:0;animation:spDraw .95s ease .1s forwards}
-#splash .sp-ring,#splash .sp-pe{opacity:0;animation:spPop .55s cubic-bezier(.2,.9,.3,1.15) .65s forwards;transform-origin:50% 50%;transform-box:fill-box}
-#splash .sp-name{font-weight:800;font-size:22px;color:var(--ink);text-align:center;line-height:1.5;opacity:0;animation:spPop .5s ease .85s forwards}
+#splash .sp-star{stroke-dasharray:100;stroke-dashoffset:100;fill-opacity:0;animation:spDraw .55s ease .05s forwards}
+#splash .sp-ring,#splash .sp-pe{opacity:0;animation:spPop .35s cubic-bezier(.2,.9,.3,1.15) .25s forwards;transform-origin:50% 50%;transform-box:fill-box}
+#splash .sp-name{font-weight:800;font-size:22px;color:var(--ink);text-align:center;line-height:1.5;opacity:0;animation:spPop .35s ease .35s forwards}
 #splash .sp-name small{display:block;font-size:10px;letter-spacing:.42em;color:var(--teal);font-weight:600;margin-top:2px;direction:ltr}
 #splash .sp-bar{width:120px;height:2px;background:#ffffff1c;border-radius:2px;overflow:hidden}
-#splash .sp-bar i{display:block;height:100%;transform:scaleX(0);transform-origin:100% 50%;background:linear-gradient(90deg,var(--teal),var(--gold));animation:spBar 1.4s ease .1s forwards}
+#splash .sp-bar i{display:block;height:100%;transform:scaleX(0);transform-origin:100% 50%;background:linear-gradient(90deg,var(--teal),var(--gold));animation:spBar .55s ease .05s forwards}
 @keyframes spDraw{to{stroke-dashoffset:0;fill-opacity:.2}}
 @keyframes spPop{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:none}}
 @keyframes spBar{to{transform:scaleX(1)}}
@@ -320,7 +320,7 @@ const tl=document.querySelector(".topline");if(tl){let t=0;const f=()=>{t=0;cons
 </script><script type="module">
 const boot3D=async()=>{
  try{
-  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||matchMedia('(max-width: 760px)').matches||(navigator.connection&&navigator.connection.saveData)||(navigator.deviceMemory&&navigator.deviceMemory<=4))return;
   const T=await import('three');
   (()=>{const c=document.getElementById('parsim-3d'),host=c?.parentElement;if(!c||!host)return;try{
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,s=new T.Scene(),cam=new T.PerspectiveCamera(36,1,.1,60);cam.position.set(4,2.7,6);cam.lookAt(0,.4,0);
